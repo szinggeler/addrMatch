@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Address-Matching</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300">
+
+    <style>
+        table {
+        table-layout: auto;
+        width: 100%;
+        border-collapse: collapse;
+        }
+
+        tbody tr:nth-child(odd) {
+        background-color: #f3f3f3;
+        }
+
+        tbody tr:nth-child(even) {
+        background-color: #fcfcfc;
+        }
+
+        th {
+        padding: 10px;
+        background-color: #dddddd;
+        }
+    </style>
+
+
+</head>
+<body >
+    <noscript>
+        You need to enable JavaScript to run this app.
+    </noscript>
+    <script type="text/javascript" src="./addrmatch.js"></script>
+
+    <div id="elm"></div>
+    <script type="text/javascript">
+        /* var styleJson = 'https://api.maptiler.com/maps/ch-swisstopo-lbm/style.json?key=HvDEAvBh5joiGDZ2dtoe'; */
+        var app = Elm.GeocodeAddrMain.init({
+            node: document.getElementById('elm'),
+            flags: {
+                height: window.innerHeight,
+                width: window.innerWidth
+            }
+        });
+
+        /* Geolocation_port_init(app);
+        Geotools_port_init(app); */
+    </script>
+
+</body>
+</html>
