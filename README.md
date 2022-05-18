@@ -11,7 +11,18 @@ ___
 
 ### Changelog
 
+#### [1.0.1] - 2022-05-18
+Added
+
+    * Adjust Decoder: Decode 'quality' field to 'float' if API returns a 'string'.
+    * Complete error message also if there are less than two results.
+
 #### [1.0.0] - 2022-02-25
 Added
 
-    First version of application published
+    * First version of application published
+
+### Copyright
+
+* stephan@zinggeler.net
+

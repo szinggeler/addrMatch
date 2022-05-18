@@ -6831,6 +6831,7 @@ var $NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required = F3(
 			decoder);
 	});
 var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$core$String$toFloat = _String_toFloat;
 var $author$project$GeocodeAddrUpdate$addrGeoDecoder = A4(
 	$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$optional,
 	'kanton',
@@ -6847,7 +6848,20 @@ var $author$project$GeocodeAddrUpdate$addrGeoDecoder = A4(
 			A3(
 				$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 				'quality',
-				$elm$json$Json$Decode$float,
+				$elm$json$Json$Decode$oneOf(
+					_List_fromArray(
+						[
+							$elm$json$Json$Decode$float,
+							A2(
+							$elm$json$Json$Decode$map,
+							function (qString) {
+								return A2(
+									$elm$core$Maybe$withDefault,
+									0,
+									$elm$core$String$toFloat(qString));
+							},
+							$elm$json$Json$Decode$string)
+						])),
 				A3(
 					$NoRedInk$elm_json_decode_pipeline$Json$Decode$Pipeline$required,
 					'geomy',
@@ -18918,51 +18932,67 @@ var $author$project$Tab$Parsed$showParsedAddresses = function (model) {
 				])));
 };
 var $author$project$Tab$Parsed$view = function (model) {
-	var showBugList = ($elm$core$List$length(model.dc) > 0) ? A2(
-		$mdgriffith$elm_ui$Element$column,
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-				$mdgriffith$elm_ui$Element$spacing(5)
-			]),
-		_List_fromArray(
-			[
-				$mdgriffith$elm_ui$Element$text('Fehler-Liste'),
-				($elm$core$List$length(model.dL) < 2) ? A2(
-				$mdgriffith$elm_ui$Element$el,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$padding(10),
-						$mdgriffith$elm_ui$Element$Background$color($author$project$MyStyles$error)
-					]),
-				$mdgriffith$elm_ui$Element$text('!! Bitte Feld-Zuordnung und Eingabedaten überprüfen !!')) : A2(
-				$mdgriffith$elm_ui$Element$column,
-				_List_fromArray(
-					[
-						$mdgriffith$elm_ui$Element$scrollbars,
-						$mdgriffith$elm_ui$Element$height(
-						$mdgriffith$elm_ui$Element$px(200)),
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-						A2($mdgriffith$elm_ui$Element$paddingXY, 15, 15),
-						$mdgriffith$elm_ui$Element$Background$color($author$project$MyStyles$error)
-					]),
-				A2(
-					$elm$core$List$map,
-					function (a) {
-						return A2(
+	var showBugList = function () {
+		var bugText = A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$scrollbars,
+					$mdgriffith$elm_ui$Element$height(
+					$mdgriffith$elm_ui$Element$px(200)),
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					A2($mdgriffith$elm_ui$Element$paddingXY, 15, 15),
+					$mdgriffith$elm_ui$Element$Background$color($author$project$MyStyles$error)
+				]),
+			A2(
+				$elm$core$List$map,
+				function (a) {
+					return A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$family(
+								_List_fromArray(
+									[$mdgriffith$elm_ui$Element$Font$monospace])),
+								$mdgriffith$elm_ui$Element$Font$color($author$project$MyStyles$uiGreyColors.bd),
+								$mdgriffith$elm_ui$Element$Font$size(14)
+							]),
+						$mdgriffith$elm_ui$Element$text(a));
+				},
+				model.dc));
+		return ($elm$core$List$length(model.dc) > 0) ? A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$spacing(5)
+				]),
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$text('Fehler-Liste'),
+					($elm$core$List$length(model.dL) < 2) ? A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+							$mdgriffith$elm_ui$Element$height(
+							$mdgriffith$elm_ui$Element$px(200))
+						]),
+					_List_fromArray(
+						[
+							A2(
 							$mdgriffith$elm_ui$Element$el,
 							_List_fromArray(
 								[
-									$mdgriffith$elm_ui$Element$Font$family(
-									_List_fromArray(
-										[$mdgriffith$elm_ui$Element$Font$monospace])),
-									$mdgriffith$elm_ui$Element$Font$color($author$project$MyStyles$uiGreyColors.bd),
-									$mdgriffith$elm_ui$Element$Font$size(14)
+									$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+									$mdgriffith$elm_ui$Element$padding(15),
+									$mdgriffith$elm_ui$Element$Background$color($author$project$MyStyles$error)
 								]),
-							$mdgriffith$elm_ui$Element$text(a));
-					},
-					model.dc))
-			])) : $mdgriffith$elm_ui$Element$none;
+							$mdgriffith$elm_ui$Element$text('!! Bitte Feld-Zuordnung und Eingabedaten überprüfen !!')),
+							bugText
+						])) : bugText
+				])) : $mdgriffith$elm_ui$Element$none;
+	}();
 	var progressBar = function () {
 		var rate = ($elm$core$List$length(model.dL) / model.cW) * 100;
 		var roundedRate = $elm$core$Basics$round(rate);
