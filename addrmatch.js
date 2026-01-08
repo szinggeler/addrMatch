@@ -19377,7 +19377,7 @@ var $author$project$Tab$Modal$contentMap = function (_v0) {
 	var n = _v0.b;
 	var zh = 'https://maps.zh.ch/?mobile=true';
 	var osm = 'https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik';
-	var lk = 'https://test.map.geo.admin.ch/?time=None&mobile=true&lang=de&E=' + ($elm$core$String$fromFloat(e) + ('&N=' + ($elm$core$String$fromFloat(n) + '&zoom=11&bgLayer=ch.swisstopo.pixelkarte-farbe&topic=ech&layers=ch.bfs.gebaeude_wohnungs_register')));
+	var lk = 'https://map.geo.admin.ch/#/map?lang=de&center=' + ($elm$core$String$fromFloat(e) + (',' + ($elm$core$String$fromFloat(n) + '&z=12&topic=ech&layers=ch.bfs.gebaeude_wohnungs_register&bgLayer=ch.swisstopo.pixelkarte-farbe')));
 	var mapIFrame = A2(
 		$mdgriffith$elm_ui$Element$el,
 		_List_fromArray(
